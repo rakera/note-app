@@ -1,4 +1,4 @@
-import { UserInterface } from '@app/user/types';
+import { UserInterface } from '@app/types/interfaces';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()

@@ -1,4 +1,4 @@
-import { typeormModuleOptions } from '@app/config/database.options';
+import { typeormModuleOptions } from '@app/config/db.source';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from '@app/app.controller';

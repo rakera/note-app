@@ -1,3 +1,2 @@
-export * from './database.constants';
-export * from './database.options';
-export * from './database.source';
+export * from './db.source';
+export * from './typeorm.config';

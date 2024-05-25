@@ -1,5 +1,9 @@
 import { UserInterface } from '@app/types/interfaces';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class UserEntity implements UserInterface {

@@ -5,7 +5,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity()
+@Entity({name: 'users'})
 export class UserEntity implements UserInterface {
   @PrimaryGeneratedColumn({
     type: 'bigint',

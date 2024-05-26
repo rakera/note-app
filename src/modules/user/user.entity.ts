@@ -1,11 +1,12 @@
 import { UserInterface } from '@app/types/interfaces';
+import { Exclude } from 'class-transformer';
 import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity({name: 'users'})
+@Entity({ name: 'users' })
 export class UserEntity implements UserInterface {
   @PrimaryGeneratedColumn({
     type: 'bigint',
@@ -16,8 +17,11 @@ export class UserEntity implements UserInterface {
   @Column({
     unique: true,
   })
-  public login: string;
+  public email: string;
 
   @Column()
+  @Exclude({
+    toPlainOnly: true,
+  })
   public password: string;
 }

@@ -5,7 +5,7 @@ import {
   IsString,
 } from 'class-validator';
 
-export class UserCreateInput implements UserCreateInterface {
+export class UserInput implements UserCreateInterface {
 
   @IsString()
   @IsEmail()

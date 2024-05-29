@@ -14,7 +14,6 @@ import { Injectable } from '@nestjs/common';
 export class AuthService {
   constructor(
     private readonly userService: UserService,
-    private readonly tokenService: TokenService,
   ) {
   }
 

@@ -1,6 +1,8 @@
+import {
+  UserInput,
+  UserOutput,
+} from '@app/types';
 import { HashService } from '@modules/user/hash.service';
-import { UserInput } from '@modules/user/input';
-import { UserOutput } from '@modules/user/output/user.output';
 import { UserEntity } from '@modules/user/user.entity';
 import { Injectable } from '@nestjs/common';
 import {

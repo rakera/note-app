@@ -1,6 +1,6 @@
 import { AuthService } from '@modules/auth/auth.service';
-import { UserInput } from '@modules/user/input';
-import { UserOutput } from '@modules/user/output/user.output';
+import { UserInput } from 'src/types/inputs/user';
+import { UserOutput } from '@app/types/outputs/user/user.output';
 import {
   Body,
   Controller,

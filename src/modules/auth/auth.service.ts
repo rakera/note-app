@@ -1,4 +1,5 @@
 import {
+  LoginOutput,
   UserInput,
   UserOutput,
 } from '@app/types';
@@ -7,16 +8,16 @@ import {
   UserExistsError,
   UserWrongEmailOrPasswordError,
 } from '@app/types/errors';
+import { TokenService } from '@modules/token/token.service';
 import { UserEntity } from '@modules/user/user.entity';
 import { UserService } from '@modules/user/user.service';
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly userService: UserService,
-    private readonly configService: ConfigService
+    private readonly tokenService: TokenService,
   ) {
   }
 
@@ -40,9 +41,8 @@ export class AuthService {
       throw new UserWrongEmailOrPasswordError();
     }
 
-    console.log(this.configService.get('jwtSecret'));
+    const token: string = await this.tokenService.generateJwtToken(user.email);
 
-
-    return new UserOutput(existUser.id, existUser.email);
+    return new LoginOutput(existUser.id, existUser.email, token);
   }
 }

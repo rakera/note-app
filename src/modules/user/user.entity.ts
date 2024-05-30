@@ -1,8 +1,10 @@
 import { UserInterface } from '@app/types/interfaces';
+import { NoteEntity } from '@modules/note/note.entity';
 import { Exclude } from 'class-transformer';
 import {
   Column,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -24,4 +26,9 @@ export class UserEntity implements UserInterface {
     toPlainOnly: true,
   })
   public password: string;
+
+  @OneToMany(
+    () => NoteEntity,
+    (note: NoteEntity) => note.user)
+  notes: NoteEntity[];
 }

@@ -3,6 +3,7 @@ import {
   NoteCreateInput,
   NoteOutput,
   NoteGetOneInput,
+  NoteUpdateInput,
 } from '@app/types';
 import { GetUser } from '@app/types/decorators/user/get-user.decorator';
 import { JwtGuard } from '@modules/auth/guards';
@@ -12,6 +13,7 @@ import {
   Controller,
   Get,
   Param,
+  Patch,
   Post,
   UseGuards,
 } from '@nestjs/common';
@@ -37,5 +39,15 @@ export class NoteController {
     @Param() noteId: NoteGetOneInput,
   ): Promise<NoteOutput> {
     return this.noteService.getNodeById(userId, noteId);
+  }
+
+  @UseGuards(JwtGuard)
+  @Patch(':id')
+  async updateNote(
+    @GetUser('id') userId: number,
+    @Param() noteId: NoteGetOneInput,
+    @Body() note: NoteUpdateInput,
+  ): Promise<NoteOutput> {
+    return this.noteService.updateNote(userId, noteId, note);
   }
 }

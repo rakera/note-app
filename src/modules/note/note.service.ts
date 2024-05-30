@@ -3,6 +3,7 @@ import {
   NoteCreateOutput,
   NoteGetOneInput,
   NoteOutput,
+  NoteUpdateInput,
 } from '@app/types';
 import {
   NoteAccessError,
@@ -39,16 +40,22 @@ export class NoteService {
     return await this.findNoteById(userId, noteId);
   }
 
+  async updateNote(userId: number, noteId: NoteGetOneInput, note: NoteUpdateInput): Promise<NoteOutput> {
+    await this.getNodeById(userId, noteId);
+    await this.entityManager.update(NoteEntity, noteId, note);
+    return this.getNodeById(userId, noteId);
+  }
+
   async findNoteById(userId: number, noteId: NoteGetOneInput): Promise<NoteOutput> {
 
     const note: NoteEntity = await this.noteRepository.findOneBy({ id: noteId.id });
 
     if (!note) {
-      throw new NoteExistsError(note.id);
+      throw new NoteExistsError(noteId.id);
     }
 
     if (note.userId !== userId) {
-      throw new NoteAccessError(note.id);
+      throw new NoteAccessError(noteId.id);
     }
 
     return note;

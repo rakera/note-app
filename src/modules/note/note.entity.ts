@@ -11,15 +11,19 @@ import {
 } from 'typeorm';
 
 @Entity({ name: 'notes' })
-export class NoteEntity implements NoteInterface{
+export class NoteEntity implements NoteInterface {
   @PrimaryGeneratedColumn('uuid')
   public id: string;
+
+  @Column({ name: 'user_id' })
+  public userId: number;
 
   @Column()
   public text: string;
 
   @CreateDateColumn({
     type: 'timestamp',
+    name: 'create_date',
     precision: 0,
   })
   public createDate: Date;
@@ -32,6 +36,7 @@ export class NoteEntity implements NoteInterface{
   public updateDate: Date;
 
   @Column({
+    name: 'share_id',
     unique: true,
     nullable: true,
   })

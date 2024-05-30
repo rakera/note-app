@@ -1,6 +1,6 @@
-import { NoteCreateOutputInterface } from '@app/types';
+import { NoteOutputInterface } from '@app/types';
 
-export class NoteCreateOutput implements NoteCreateOutputInterface {
+export class NoteOutput implements NoteOutputInterface {
 
   public id: string;
 

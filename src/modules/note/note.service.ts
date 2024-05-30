@@ -1,7 +1,13 @@
 import {
   NoteCreateInput,
   NoteCreateOutput,
+  NoteGetOneInput,
+  NoteOutput,
 } from '@app/types';
+import {
+  NoteAccessError,
+  NoteExistsError,
+} from '@app/types/errors';
 import { NoteEntity } from '@modules/note/note.entity';
 import { Injectable } from '@nestjs/common';
 import {
@@ -23,16 +29,28 @@ export class NoteService {
   ) {
   }
 
-  async createNote(note: NoteCreateInput): Promise<NoteCreateOutput> {
+  async createNote(userId: number, note: NoteCreateInput): Promise<NoteCreateOutput> {
 
-    const newNote: NoteEntity = this.noteRepository.create(note);
-    const savedNote: NoteEntity = await this.noteRepository.save(newNote);
-    return new NoteCreateOutput(
-      savedNote.id,
-      savedNote.userId,
-      savedNote.text,
-      savedNote.createDate,
-      savedNote.updateDate,
-    );
+    const newNote: NoteEntity = this.noteRepository.create({ ...note, userId });
+    return await this.entityManager.save(newNote);
+  }
+
+  async getNodeById(userId: number, noteId: NoteGetOneInput): Promise<NoteOutput> {
+    return await this.findNoteById(userId, noteId);
+  }
+
+  async findNoteById(userId: number, noteId: NoteGetOneInput): Promise<NoteOutput> {
+
+    const note: NoteEntity = await this.noteRepository.findOneBy({ id: noteId.id });
+
+    if (!note) {
+      throw new NoteExistsError(note.id);
+    }
+
+    if (note.userId !== userId) {
+      throw new NoteAccessError(note.id);
+    }
+
+    return note;
   }
 }

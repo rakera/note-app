@@ -8,11 +8,6 @@ import {
 
 export class NoteCreateInput implements NoteCreateInterface {
 
-  @IsInt()
-  @Min(0)
-  @IsNotEmpty()
-  public userId: number;
-
   @IsString()
   @IsNotEmpty()
   public text: string;

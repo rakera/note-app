@@ -1,3 +1,4 @@
+import { NoteInterface } from '@app/types';
 import { UserEntity } from '@modules/user/user.entity';
 import {
   Column,
@@ -10,7 +11,7 @@ import {
 } from 'typeorm';
 
 @Entity({ name: 'notes' })
-export class NoteEntity {
+export class NoteEntity implements NoteInterface{
   @PrimaryGeneratedColumn('uuid')
   public id: string;
 

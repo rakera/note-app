@@ -1,10 +1,12 @@
 import { AuthService } from '@modules/auth/auth.service';
-import { UserInput } from '@modules/user/input';
-import { UserOutput } from '@modules/user/output/user.output';
+import { JwtGuard } from '@modules/auth/guards';
+import { UserInput } from 'src/types/inputs/user';
+import { UserOutput } from '@app/types/outputs/user/user.output';
 import {
   Body,
   Controller,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 
 @Controller('auth')
@@ -20,5 +22,11 @@ export class AuthController {
   @Post('login')
   async loginUser(@Body() user: UserInput): Promise<UserOutput> {
     return this.authService.loginUser(user);
+  }
+
+  @UseGuards(JwtGuard)
+  @Post('test')
+  test() {
+    return true
   }
 }

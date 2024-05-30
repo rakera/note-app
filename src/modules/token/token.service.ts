@@ -10,12 +10,12 @@ export class TokenService {
   ) {
   }
 
-  async generateJwtToken(email: string): Promise<string> {
+  async generateJwtToken(id: number, email: string): Promise<string> {
     const secret = this.configService.get('jwtSecret');
     const expiresIn = this.configService.get('jwtExpire');
 
 
-    return this.jwtService.sign({ email }, {
+    return this.jwtService.sign({ id, email }, {
       secret,
       expiresIn,
     });

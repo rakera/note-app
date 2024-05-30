@@ -41,7 +41,7 @@ export class AuthService {
       throw new UserWrongEmailOrPasswordError();
     }
 
-    const token: string = await this.tokenService.generateJwtToken(user.email);
+    const token: string = await this.tokenService.generateJwtToken(existUser.id, existUser.email);
 
     return new LoginOutput(existUser.id, existUser.email, token);
   }

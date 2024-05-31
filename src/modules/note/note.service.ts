@@ -46,6 +46,12 @@ export class NoteService {
     return this.getNodeById(userId, noteId);
   }
 
+  async deleteNote(userId: number, noteId: NoteGetOneInput): Promise<boolean> {
+    await this.getNodeById(userId, noteId);
+    const { affected } = await this.entityManager.delete(NoteEntity, noteId);
+    return !!affected;
+  }
+
   async findNoteById(userId: number, noteId: NoteGetOneInput): Promise<NoteOutput> {
 
     const note: NoteEntity = await this.noteRepository.findOneBy({ id: noteId.id });

@@ -11,6 +11,7 @@ import { NoteService } from '@modules/note/note.service';
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -49,5 +50,14 @@ export class NoteController {
     @Body() note: NoteUpdateInput,
   ): Promise<NoteOutput> {
     return this.noteService.updateNote(userId, noteId, note);
+  }
+
+  @UseGuards(JwtGuard)
+  @Delete(':id')
+  async deleteNote(
+    @GetUser('id') userId: number,
+    @Param() noteId: NoteGetOneInput,
+  ): Promise<boolean> {
+    return this.noteService.deleteNote(userId, noteId);
   }
 }

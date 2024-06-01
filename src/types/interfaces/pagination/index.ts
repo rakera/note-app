@@ -1,1 +1,1 @@
-export * from './pagination-results.interface';
+export * from './paginate-response.interface';

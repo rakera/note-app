@@ -1,11 +1,11 @@
 import {
-  NoteSearchSortEnum,
   SearchDirectionEnum,
+  SearchSortEnum,
 } from '@app/types/enums';
 
 export interface NoteGetManyInterface {
   limit: number;
-  page: number;
-  sort: NoteSearchSortEnum;
+  offset: number;
+  sort: SearchSortEnum;
   direction: SearchDirectionEnum;
 }

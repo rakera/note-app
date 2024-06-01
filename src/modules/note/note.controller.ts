@@ -5,7 +5,7 @@ import {
   NoteGetOneInput,
   NoteUpdateInput,
   NoteGetManyInput,
-  PaginationResultsInterface,
+  PaginateResponseInterface,
   GetUser,
 } from '@app/types';
 import { JwtGuard } from '@modules/auth/guards';
@@ -69,7 +69,7 @@ export class NoteController {
   async getManyNotes(
     @GetUser('id') userId: number,
     @Query() params: NoteGetManyInput,
-  ): Promise<PaginationResultsInterface<NoteOutput>> {
+  ): Promise<PaginateResponseInterface<NoteOutput>> {
     return await this.noteService.getManyNotes(userId, params);
   }
 }

@@ -1,7 +1,7 @@
 import { NoteGetManyInterface } from '@app/types';
 import {
-  NoteSearchSortEnum,
   SearchDirectionEnum,
+  SearchSortEnum,
 } from '@app/types/enums';
 import { Transform } from 'class-transformer';
 import {
@@ -13,20 +13,20 @@ import {
 } from 'class-validator';
 
 export class NoteGetManyInput implements NoteGetManyInterface {
-  @Transform(({ value }) => +(value))
+  @Transform(({ value }) => +value)
   @IsNumber()
-  @Min(0)
-  public page: number;
-
-  @Transform(({ value }) => +(value))
-  @IsNumber()
-  @Min(0)
+  @Min(1)
   @Max(50)
   public limit: number;
 
+  @Transform(({ value }) => +value)
+  @IsNumber()
+  @Min(1)
+  public offset: number;
+
   @IsString()
-  @IsEnum(NoteSearchSortEnum)
-  public sort: NoteSearchSortEnum;
+  @IsEnum(SearchSortEnum)
+  public sort: SearchSortEnum;
 
   @IsString()
   @IsEnum(SearchDirectionEnum)

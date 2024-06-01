@@ -4,8 +4,10 @@ import {
   NoteOutput,
   NoteGetOneInput,
   NoteUpdateInput,
+  NoteGetManyInput,
+  PaginationResultsInterface,
+  GetUser,
 } from '@app/types';
-import { GetUser } from '@app/types/decorators/user/get-user.decorator';
 import { JwtGuard } from '@modules/auth/guards';
 import { NoteService } from '@modules/note/note.service';
 import {
@@ -16,6 +18,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 
@@ -34,7 +37,7 @@ export class NoteController {
   }
 
   @UseGuards(JwtGuard)
-  @Get(':id')
+  @Get('get/:id')
   async getNoteById(
     @GetUser('id') userId: number,
     @Param() noteId: NoteGetOneInput,
@@ -43,7 +46,7 @@ export class NoteController {
   }
 
   @UseGuards(JwtGuard)
-  @Patch(':id')
+  @Patch('update/:id')
   async updateNote(
     @GetUser('id') userId: number,
     @Param() noteId: NoteGetOneInput,
@@ -53,11 +56,20 @@ export class NoteController {
   }
 
   @UseGuards(JwtGuard)
-  @Delete(':id')
+  @Delete('delete/:id')
   async deleteNote(
     @GetUser('id') userId: number,
     @Param() noteId: NoteGetOneInput,
   ): Promise<boolean> {
     return this.noteService.deleteNote(userId, noteId);
+  }
+
+  @UseGuards(JwtGuard)
+  @Get('all-notes')
+  async getManyNotes(
+    @GetUser('id') userId: number,
+    @Query() params: NoteGetManyInput,
+  ): Promise<PaginationResultsInterface<NoteOutput>> {
+    return await this.noteService.getManyNotes(userId, params);
   }
 }

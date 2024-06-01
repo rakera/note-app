@@ -1,9 +1,11 @@
 import {
   NoteCreateInput,
   NoteCreateOutput,
+  NoteGetManyInput,
   NoteGetOneInput,
   NoteOutput,
   NoteUpdateInput,
+  PaginationResultsInterface,
 } from '@app/types';
 import {
   NoteAccessError,
@@ -18,6 +20,7 @@ import {
 import {
   EntityManager,
   Repository,
+  SelectQueryBuilder,
 } from 'typeorm';
 
 @Injectable()
@@ -31,7 +34,6 @@ export class NoteService {
   }
 
   async createNote(userId: number, note: NoteCreateInput): Promise<NoteCreateOutput> {
-
     const newNote: NoteEntity = this.noteRepository.create({ ...note, userId });
     return await this.entityManager.save(newNote);
   }
@@ -52,8 +54,14 @@ export class NoteService {
     return !!affected;
   }
 
-  async findNoteById(userId: number, noteId: NoteGetOneInput): Promise<NoteOutput> {
+  async getManyNotes(userId: number, params: NoteGetManyInput): Promise<PaginationResultsInterface<NoteOutput>> {
+    console.log(params);
+    const queryBuilder: SelectQueryBuilder<NoteEntity> = this.noteRepository.createQueryBuilder('note');
+    queryBuilder.where('note.userId = :userId', { userId });
+    return this.paginate(queryBuilder, params.limit, params.page);
+  }
 
+  async findNoteById(userId: number, noteId: NoteGetOneInput): Promise<NoteOutput> {
     const note: NoteEntity = await this.noteRepository.findOneBy({ id: noteId.id });
 
     if (!note) {
@@ -65,5 +73,24 @@ export class NoteService {
     }
 
     return note;
+  }
+
+  async paginate<T extends object>(
+    queryBuilder: SelectQueryBuilder<T>,
+    limit: number,
+    page: number,
+  ): Promise<PaginationResultsInterface<T>> {
+    const totalItems: number = await queryBuilder.getCount();
+    const totalPages: number = Math.ceil(totalItems / limit);
+    queryBuilder.skip((page - 1) * limit).take(limit);
+    const items: T[] = await queryBuilder.getMany();
+    return {
+      items,
+      meta: {
+        totalItems,
+        totalPages,
+        currentPage: page,
+      },
+    };
   }
 }

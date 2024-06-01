@@ -1,4 +1,4 @@
-import { NoteUpdateInterface } from '@app/types/interfaces/note/note-update.interface';
+import { NoteUpdateInterface } from '@app/types';
 import {
   IsNotEmpty,
   IsString,

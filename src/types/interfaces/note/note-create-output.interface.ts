@@ -4,4 +4,5 @@ export interface NoteCreateOutputInterface {
   text: string;
   createDate: Date;
   updateDate: Date;
+  shareId: string;
 }

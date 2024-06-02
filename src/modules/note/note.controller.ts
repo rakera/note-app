@@ -21,7 +21,6 @@ import {
   Post,
   Query,
   UseGuards,
-  ValidationPipe,
 } from '@nestjs/common';
 
 @Controller('notes')

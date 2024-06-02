@@ -7,6 +7,7 @@ import {
   NoteGetManyInput,
   PaginateResponseInterface,
   GetUser,
+  NoteShareInput,
 } from '@app/types';
 import { JwtGuard } from '@modules/auth/guards';
 import { NoteService } from '@modules/note/note.service';
@@ -20,6 +21,7 @@ import {
   Post,
   Query,
   UseGuards,
+  ValidationPipe,
 } from '@nestjs/common';
 
 @Controller('notes')
@@ -75,10 +77,15 @@ export class NoteController {
 
   @UseGuards(JwtGuard)
   @Get('share/:id')
-  async shareNote(
+  async shareNoteById(
     @GetUser('id') userId: number,
     @Param() noteId: NoteGetOneInput,
   ): Promise<NoteOutput> {
-    return await this.noteService.shareNote(userId, noteId);
+    return await this.noteService.shareNoteById(userId, noteId);
+  }
+
+  @Get('shared/:shareId')
+  async sharedNote(@Param() shareId: NoteShareInput): Promise<NoteOutput> {
+    return this.noteService.getNoteByShareId(shareId);
   }
 }

@@ -4,6 +4,7 @@ import {
   NoteGetManyInput,
   NoteGetOneInput,
   NoteOutput,
+  NoteShareInput,
   NoteUpdateInput,
   PaginateResponseInterface,
 } from '@app/types';
@@ -63,13 +64,22 @@ export class NoteService {
     return this.paginateResponse(queryBuilder, params.limit, params.offset);
   }
 
-  async shareNote(userId: number, noteId: NoteGetOneInput): Promise<NoteOutput> {
-    console.log(userId);
+  async shareNoteById(userId: number, noteId: NoteGetOneInput): Promise<NoteOutput> {
     const note: NoteOutput = await this.findNoteById(userId, noteId);
 
     if (!note.shareId) {
       note.shareId = uuidv4();
       await this.entityManager.save(note);
+    }
+
+    return note;
+  }
+
+  async getNoteByShareId(shareId: NoteShareInput): Promise<NoteOutput> {
+    const note: NoteEntity = await this.noteRepository.findOneBy({...shareId});
+
+    if (!note) {
+      throw new NoteExistsError(shareId.shareId);
     }
 
     return note;

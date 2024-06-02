@@ -37,6 +37,7 @@ export class NoteEntity implements NoteInterface {
 
   @Column({
     name: 'share_id',
+    type: 'uuid',
     unique: true,
     nullable: true,
   })

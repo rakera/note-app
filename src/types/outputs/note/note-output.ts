@@ -11,4 +11,6 @@ export class NoteOutput implements NoteOutputInterface {
   public createDate: Date;
 
   public updateDate: Date;
+
+  public shareId: string;
 }

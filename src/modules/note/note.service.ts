@@ -22,6 +22,7 @@ import {
   Repository,
   SelectQueryBuilder,
 } from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class NoteService {
@@ -60,6 +61,18 @@ export class NoteService {
     queryBuilder.addOrderBy(params.sort, params.direction);
 
     return this.paginateResponse(queryBuilder, params.limit, params.offset);
+  }
+
+  async shareNote(userId: number, noteId: NoteGetOneInput): Promise<NoteOutput> {
+    console.log(userId);
+    const note: NoteOutput = await this.findNoteById(userId, noteId);
+
+    if (!note.shareId) {
+      note.shareId = uuidv4();
+      await this.entityManager.save(note);
+    }
+
+    return note;
   }
 
   async findNoteById(userId: number, noteId: NoteGetOneInput): Promise<NoteOutput> {

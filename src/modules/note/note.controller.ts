@@ -72,4 +72,13 @@ export class NoteController {
   ): Promise<PaginateResponseInterface<NoteOutput>> {
     return await this.noteService.getManyNotes(userId, params);
   }
+
+  @UseGuards(JwtGuard)
+  @Get('share/:id')
+  async shareNote(
+    @GetUser('id') userId: number,
+    @Param() noteId: NoteGetOneInput,
+  ): Promise<NoteOutput> {
+    return await this.noteService.shareNote(userId, noteId);
+  }
 }

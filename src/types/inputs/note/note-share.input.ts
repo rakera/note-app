@@ -1,5 +1,4 @@
 import { NoteShareInterface } from '@app/types';
-import { ApiProperty } from '@nestjs/swagger';
 import {
   IsNotEmpty,
   IsUUID,
@@ -7,7 +6,6 @@ import {
 
 export class NoteShareInput implements NoteShareInterface {
 
-  @ApiProperty({ example: '9c2e0d27-be1d-497f-8739-1a4f946894cc' })
   @IsUUID()
   @IsNotEmpty()
   public shareId: string;

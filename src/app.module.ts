@@ -1,6 +1,6 @@
 import {
   configModuleOptions,
-  loggerModuleConfig,
+  pinoLoggerConfig,
 } from '@app/config';
 import { typeormModuleOptions } from '@app/config/typeormModuleOptions.config';
 import { Module } from '@nestjs/common';
@@ -16,7 +16,7 @@ import { LoggerModule } from 'nestjs-pino';
 
 @Module({
   imports: [
-    LoggerModule.forRoot(loggerModuleConfig),
+    LoggerModule.forRoot(pinoLoggerConfig),
     ConfigModule.forRoot(configModuleOptions),
     TypeOrmModule.forRootAsync(typeormModuleOptions),
     UserModule,

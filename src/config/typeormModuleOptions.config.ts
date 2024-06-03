@@ -16,5 +16,6 @@ export const typeormModuleOptions: TypeOrmModuleAsyncOptions = {
     username: configService.get<string>('DB_USERNAME'),
     password: configService.get<string>('DB_PASSWORD'),
     entities: [path.join(__dirname, '/../modules/**/*.entity{.ts,.js}')],
+    logging: ['query', 'error'],
   }),
 };

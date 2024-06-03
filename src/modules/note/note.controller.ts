@@ -89,12 +89,12 @@ export class NoteController {
 
   @ApiOperation({ summary: 'Delete note by id' })
   @ApiResponse({
-    status: HttpStatus.NO_CONTENT,
+    status: HttpStatus.OK,
     type: Boolean,
   })
   @ApiBearerAuth('access-token')
   @UseGuards(JwtGuard)
-  @HttpCode(HttpStatus.NO_CONTENT)
+  @HttpCode(HttpStatus.OK)
   @Delete('delete/:id')
   async deleteNote(
     @GetUser('id') userId: number,

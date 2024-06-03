@@ -2,7 +2,7 @@ import {
   configModuleOptions,
   pinoLoggerConfig,
 } from '@app/config';
-import { typeormModuleOptions } from '@app/config/typeormModuleOptions.config';
+import { typeormModuleOptions } from '@app/config/typeorm-module-options.config';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from '@app/app.controller';

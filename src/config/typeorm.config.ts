@@ -1,4 +1,4 @@
-import databaseConfig from '@app/config/dbSource.config';
+import databaseConfig from '@app/config/db-source.config';
 import path from 'path';
 import dotenv from 'dotenv';
 import { DataSource } from 'typeorm';

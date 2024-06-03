@@ -1,4 +1,4 @@
-import databaseConfig from '@app/config/dbSource.config';
+import databaseConfig from '@app/config/db-source.config';
 import { ConfigModuleOptions } from '@nestjs/config';
 import securityConfig from '@app/config/security.config';
 

@@ -1,1 +1,1 @@
-export * from './password-hiding-logger';
+export * from './custom-logger';

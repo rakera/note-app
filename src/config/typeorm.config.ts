@@ -1,4 +1,3 @@
-import { PasswordHidingLogger } from '@app/common';
 import databaseConfig from '@app/config/dbSource.config';
 import path from 'path';
 import dotenv from 'dotenv';

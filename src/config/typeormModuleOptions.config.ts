@@ -1,6 +1,4 @@
-import {
-  PasswordHidingLogger,
-} from '@app/common';
+import { CustomLogger } from '@app/common';
 import {
   ConfigModule,
   ConfigService,
@@ -19,6 +17,6 @@ export const typeormModuleOptions: TypeOrmModuleAsyncOptions = {
     username: configService.get<string>('username'),
     password: configService.get<string>('password'),
     entities: [path.join(__dirname, '/../modules/**/*.entity{.ts,.js}')],
-    logging: 'all',
+    logger: new CustomLogger(['query', 'error']),
   }),
 };

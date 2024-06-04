@@ -61,7 +61,7 @@ $ npm run test:e2e
 
 ## Contacts
 
-- Author: [Roman Akera](mailto:roman.akera@gmail.com)
+- Author: Roman Akera
 - LinkedIn: [rakera](https://www.linkedin.com/in/rakera/)
-- Telegram: @VikingUlf 
-- Email: roman.akera@gmail.com
+- Telegram - [@VikingUlf](https://t.me/VikingUlf)
+- Email: [roman.akera@gmail.com](mailto:roman.akera@gmail.com)

@@ -1,6 +1,5 @@
 import { typeormModuleOptions } from '@app/config';
 import typeormConfig from '@app/config/typeorm.config';
-import { UserEntity } from '@modules/user/user.entity';
 import { INestApplication } from '@nestjs/common';
 import {
   Test,

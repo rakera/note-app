@@ -111,7 +111,7 @@ export class NoteController {
   @ApiBearerAuth('access-token')
   @UseGuards(JwtGuard)
   @HttpCode(HttpStatus.OK)
-  @Get('all-notes')
+  @Get('all')
   async getManyNotes(
     @GetUser('id') userId: number,
     @Query() params: NoteGetManyInput,

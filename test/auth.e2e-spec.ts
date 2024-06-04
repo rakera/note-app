@@ -34,7 +34,7 @@ describe('Auth Module (e2e)', () => {
       .expect(201);
 
     expect(response.body).toEqual({
-      id: expect.anything(),
+      id: expect.any(String),
       email: 'test@example.com',
     });
   });
@@ -55,7 +55,7 @@ describe('Auth Module (e2e)', () => {
       .expect(200);
 
     expect(response.body).toEqual({
-      id: expect.anything(),
+      id: expect.any(String),
       email: 'test@example.com',
       token: expect.any(String),
     });

@@ -43,7 +43,7 @@ describe('Notes Module (e2e)', () => {
 
     expect(response.body).toEqual({
       id: expect.any(String),
-      userId: expect.anything(),
+      userId: expect.any(String),
       text: 'New note',
       createDate: expect.any(String),
       updateDate: expect.any(String),
@@ -61,7 +61,7 @@ describe('Notes Module (e2e)', () => {
 
     expect(response.body).toEqual({
       id: noteId,
-      userId: expect.anything(),
+      userId: expect.any(String),
       text: 'New note',
       createDate: expect.any(String),
       updateDate: expect.any(String),
@@ -78,7 +78,7 @@ describe('Notes Module (e2e)', () => {
 
     expect(response.body).toEqual({
       id: noteId,
-      userId: expect.anything(),
+      userId: expect.any(String),
       text: 'Updated note',
       createDate: expect.any(String),
       updateDate: expect.any(String),
@@ -101,7 +101,7 @@ describe('Notes Module (e2e)', () => {
     expect(response.body).toEqual({
       'items': [{
         id: expect.any(String),
-        userId: expect.anything(),
+        userId: expect.any(String),
         text: 'Updated note',
         createDate: expect.any(String),
         updateDate: expect.any(String),
@@ -125,7 +125,7 @@ describe('Notes Module (e2e)', () => {
 
     expect(response.body).toEqual({
       id: noteId,
-      userId: expect.anything(),
+      userId: expect.any(String),
       text: 'Updated note',
       createDate: expect.any(String),
       updateDate: expect.any(String),
@@ -140,7 +140,7 @@ describe('Notes Module (e2e)', () => {
 
     expect(sharedNoteResponse.body).toEqual({
       id: noteId,
-      userId: expect.anything(),
+      userId: expect.any(String),
       text: 'Updated note',
       createDate: expect.any(String),
       updateDate: expect.any(String),

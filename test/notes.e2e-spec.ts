@@ -1,4 +1,5 @@
 import { typeormModuleOptions } from '@app/config';
+import { UserEntity } from '@modules/user/user.entity';
 import { INestApplication } from '@nestjs/common';
 import {
   Test,
@@ -28,6 +29,7 @@ describe('Notes Module (e2e)', () => {
   });
 
   afterAll(async () => {
+    await typeormConfig.createQueryBuilder().delete().from(UserEntity).execute();
     await typeormConfig.destroy();
     await app.close();
   });

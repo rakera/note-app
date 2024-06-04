@@ -1,5 +1,6 @@
 import { typeormModuleOptions } from '@app/config';
 import typeormConfig from '@app/config/typeorm.config';
+import { UserEntity } from '@modules/user/user.entity';
 import { INestApplication } from '@nestjs/common';
 import {
   Test,
@@ -23,6 +24,8 @@ describe('Auth Module (e2e)', () => {
   });
 
   afterAll(async () => {
+    await typeormConfig.createQueryBuilder().delete().from(UserEntity).execute();
+    await typeormConfig.createQueryBuilder().delete().from(UserEntity).execute();
     await typeormConfig.destroy();
     await app.close();
   });
@@ -33,9 +36,8 @@ describe('Auth Module (e2e)', () => {
       .send({ email: 'test@example.com', password: 'password' })
       .expect(201);
 
-    const id = response.body.id;
     expect(response.body).toEqual({
-      id,
+      id: expect.anything(),
       email: 'test@example.com',
     });
   });
@@ -63,7 +65,7 @@ describe('Auth Module (e2e)', () => {
     expect(response.body).toEqual({
       id: expect.anything(),
       email: 'test@example.com',
-      token:expect.any(String),
+      token: expect.any(String),
     });
   });
 });

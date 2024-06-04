@@ -69,6 +69,23 @@ describe('Notes Module (e2e)', () => {
     });
   });
 
+  it('should update the note', async () => {
+    const response = await request(app.getHttpServer())
+      .patch(`/notes/update/${noteId}`)
+      .set('Authorization', `Bearer ${token}`)
+      .send({ text: 'Updated note' })
+      .expect(200);
+
+    expect(response.body).toEqual({
+      id: noteId,
+      userId: expect.anything(),
+      text: 'Updated note',
+      createDate: expect.any(String),
+      updateDate: expect.any(String),
+      shareId: null,
+    });
+  });
+
   it('should get all notes for the user', async () => {
     const response = await request(app.getHttpServer())
       .get('/notes/all')
@@ -85,7 +102,7 @@ describe('Notes Module (e2e)', () => {
       'items': [{
         id: expect.any(String),
         userId: expect.anything(),
-        text: 'New note',
+        text: 'Updated note',
         createDate: expect.any(String),
         updateDate: expect.any(String),
         shareId: null,
@@ -95,23 +112,6 @@ describe('Notes Module (e2e)', () => {
         'totalPages': expect.anything(),
         'currentPage': expect.any(String),
       },
-    });
-  });
-
-  it('should update the note', async () => {
-    const response = await request(app.getHttpServer())
-      .patch(`/notes/update/${noteId}`)
-      .set('Authorization', `Bearer ${token}`)
-      .send({ text: 'Updated note' })
-      .expect(200);
-
-    expect(response.body).toEqual({
-      id: noteId,
-      userId: expect.anything(),
-      text: 'Updated note',
-      createDate: expect.any(String),
-      updateDate: expect.any(String),
-      shareId: null,
     });
   });
 

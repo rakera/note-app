@@ -1,4 +1,4 @@
-export const loggerModuleConfig = {
+export const pinoLoggerConfig = {
   pinoHttp: {
     level: 'info', // Hide messages below the specified log level. Accepts a trace, debug, info, warn, error, or fatal
     transport: {

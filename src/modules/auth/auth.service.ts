@@ -30,7 +30,7 @@ export class AuthService {
     return this.userService.createUser(user);
   }
 
-  async loginUser(user: UserInput): Promise<UserOutput> {
+  async loginUser(user: UserInput): Promise<LoginOutput> {
     const existUser: UserEntity = await this.userService.findUserByEmail(user.email);
     if (!existUser) {
       throw new UserExistsError(user.email);

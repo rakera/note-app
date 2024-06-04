@@ -1,10 +1,13 @@
+import {
+  LoginOutput,
+  UserInput,
+} from '@app/types';
 import { AuthService } from '@modules/auth/auth.service';
 import {
   ApiOperation,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { UserInput } from 'src/types/inputs/user';
 import { UserOutput } from '@app/types/outputs/user/user.output';
 import {
   Body,
@@ -35,11 +38,11 @@ export class AuthController {
   @ApiOperation({ summary: 'Login user' })
   @ApiResponse({
     status: HttpStatus.OK,
-    type: UserOutput,
+    type: LoginOutput,
   })
   @HttpCode(HttpStatus.OK)
   @Post('login')
-  async loginUser(@Body() user: UserInput): Promise<UserOutput> {
+  async loginUser(@Body() user: UserInput): Promise<LoginOutput> {
     return this.authService.loginUser(user);
   }
 }

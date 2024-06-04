@@ -1,3 +1,4 @@
+import { CustomLogger } from '@app/common';
 import {
   ConfigModule,
   ConfigService,
@@ -10,12 +11,12 @@ export const typeormModuleOptions: TypeOrmModuleAsyncOptions = {
   inject: [ConfigService],
   useFactory: (configService: ConfigService) => ({
     type: 'postgres',
-    host: configService.get<string>('DB_HOST'),
-    port: configService.get<number>('DB_PORT'),
-    database: configService.get<string>('DB_NAME'),
-    username: configService.get<string>('DB_USERNAME'),
-    password: configService.get<string>('DB_PASSWORD'),
+    host: configService.get<string>('host'),
+    port: configService.get<number>('port'),
+    database: configService.get<string>('database'),
+    username: configService.get<string>('username'),
+    password: configService.get<string>('password'),
     entities: [path.join(__dirname, '/../modules/**/*.entity{.ts,.js}')],
-    logging: ['query', 'error'],
+    logger: new CustomLogger(['query', 'error']),
   }),
 };

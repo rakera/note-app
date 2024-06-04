@@ -24,8 +24,6 @@ describe('Auth Module (e2e)', () => {
   });
 
   afterAll(async () => {
-    await typeormConfig.createQueryBuilder().delete().from(UserEntity).execute();
-    await typeormConfig.createQueryBuilder().delete().from(UserEntity).execute();
     await typeormConfig.destroy();
     await app.close();
   });
@@ -43,17 +41,12 @@ describe('Auth Module (e2e)', () => {
   });
 
   it('should not register a user with an existing email', async () => {
-    await request(app.getHttpServer())
-      .post('/auth/register')
-      .send({ email: 'existing@example.com', password: 'password' })
-      .expect(201);
-
     const response = await request(app.getHttpServer())
       .post('/auth/register')
-      .send({ email: 'existing@example.com', password: 'password' })
+      .send({ email: 'test@example.com', password: 'password' })
       .expect(409);
 
-    expect(response.body.message).toEqual('User with email: existing@example.com already exists');
+    expect(response.body.message).toEqual('User with email: test@example.com already exists');
   });
 
   it('should login the user', async () => {

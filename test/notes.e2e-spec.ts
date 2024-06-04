@@ -161,12 +161,12 @@ describe('Notes Module (e2e)', () => {
 async function registerAndLogin(app: INestApplication): Promise<string> {
   await request(app.getHttpServer())
     .post('/auth/register')
-    .send({ email: 'testuser@example.com', password: 'password' })
+    .send({ email: 'test2@example.com', password: 'password' })
     .expect(201);
 
   const loginResponse = await request(app.getHttpServer())
     .post('/auth/login')
-    .send({ email: 'testuser@example.com', password: 'password' })
+    .send({ email: 'test2@example.com', password: 'password' })
     .expect(200);
 
   return loginResponse.body.token;

@@ -5,8 +5,6 @@ import {
 import { typeormModuleOptions } from '@app/config/typeorm-module-options.config';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { AppController } from '@app/app.controller';
-import { AppService } from '@app/app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from '@app/modules/user/user.module';
 import { AuthModule } from '@modules/auth/auth.module';
@@ -24,8 +22,6 @@ import { LoggerModule } from 'nestjs-pino';
     TokenModule,
     NoteModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {
 }
